@@ -1,0 +1,133 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Nunito';
+  background:#120d0b;
+  overflow:hidden;
+  color:#f5e6d3;
+}
+
+/* 🌌 CINEMA ATMOSPHERE */
+.cinema{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at center, rgba(255,200,150,0.08), transparent 60%),
+    linear-gradient(#0f0a08, #1a120f);
+}
+
+/* 🕯️ CANVAS */
+canvas{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+/* 🎬 OVERLAY */
+.overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:10;
+}
+
+/* 🎭 ACTS */
+.act{
+  position:absolute;
+  opacity:0;
+  transform:scale(1.05);
+  transition:2s cubic-bezier(0.22,1,0.36,1);
+}
+
+.act.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* TEXTO */
+h1{
+  font-family:'Poppins';
+  font-size:2.2rem;
+  letter-spacing:1px;
+}
+
+.small{
+  opacity:0.4;
+  font-style:italic;
+}
+
+p{
+  max-width:320px;
+  line-height:1.6;
+}
+
+/* BOTÃO AAA */
+button{
+  margin-top:20px;
+  padding:12px 24px;
+  border:none;
+  border-radius:30px;
+  background:#6D4C41;
+  color:white;
+  cursor:pointer;
+  transition:.4s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* FADE CINEMATOGRÁFICO */
+.fade{
+  animation:fadeIn 3s forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.intro-cutscene{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:999;
+  overflow:hidden;
+}
+
+/* 💡 pulso de luz inicial */
+.light-pulse{
+  position:absolute;
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,200,150,0.3), transparent 70%);
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  animation: pulseLight 3s ease forwards;
+}
+
+@keyframes pulseLight{
+  0%{transform:translate(-50%,-50%) scale(0);}
+  40%{transform:translate(-50%,-50%) scale(1);}
+  100%{transform:translate(-50%,-50%) scale(4); opacity:0;}
+  
+}
+body{
+  animation:breathingWorld 6s ease-in-out infinite;
+}
+
+@keyframes breathingWorld{
+  0%,100%{filter:brightness(0.9);}
+  50%{filter:brightness(1.05);}
+}
