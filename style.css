@@ -1,98 +1,104 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #120d0b;
+    overflow: hidden;
+    color: #f5e6d3;
 }
 
-body{
-  font-family:'Nunito';
-  background:#120d0b;
-  overflow:hidden;
-  color:#f5e6d3;
+/* 🌌 ATMOSFERA CINEMATOGRÁFICA */
+.cinema {
+    position: fixed;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
+    z-index: 0;
 }
 
-/* 🌌 CINEMA ATMOSPHERE */
-.cinema{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:
-    radial-gradient(circle at center, rgba(255,200,150,0.08), transparent 60%),
-    linear-gradient(#0f0a08, #1a120f);
+.cinema::after {
+    content: "";
+    position: fixed;
+    top: -100%; left: -100%; width: 300%; height: 300%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.07;
+    pointer-events: none;
+    animation: grain 8s steps(10) infinite;
+    z-index: 50;
 }
 
-/* 🕯️ CANVAS */
-canvas{
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:1;
+/* 🎬 OVERLAY & ATOS */
+.overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; z-index: 10;
+    transition: transform 0.1s ease-out;
 }
 
-/* 🎬 OVERLAY */
-.overlay{
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  z-index:10;
+.act {
+    position: absolute;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: 2s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
 }
 
-/* 🎭 ACTS */
-.act{
-  position:absolute;
-  opacity:0;
-  transform:scale(1.05);
-  transition:2s cubic-bezier(0.22,1,0.36,1);
+.act.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
 }
 
-.act.active{
-  opacity:1;
-  transform:scale(1);
+/* 🎁 GRID DE PRESENTES */
+.presents-grid {
+    display: flex; gap: 20px; justify-content: center;
+    margin-top: 30px;
 }
 
-/* TEXTO */
-h1{
-  font-family:'Poppins';
-  font-size:2.2rem;
-  letter-spacing:1px;
+.card-present {
+    width: 120px; height: 150px;
+    perspective: 1000px; cursor: pointer;
 }
 
-.small{
-  opacity:0.4;
-  font-style:italic;
+.card-inner {
+    width: 100%; height: 100%;
+    position: relative; transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-p{
-  max-width:320px;
-  line-height:1.6;
+.card-present.open .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; display: flex;
+    flex-direction: column; align-items: center;
+    justify-content: center; border-radius: 10px;
 }
 
-/* BOTÃO AAA */
-button{
-  margin-top:20px;
-  padding:12px 24px;
-  border:none;
-  border-radius:30px;
-  background:#6D4C41;
-  color:white;
-  cursor:pointer;
-  transition:.4s;
+.card-front { background: #6D4C41; border: 1px solid #D4AF37; }
+.card-back { background: #f5e6d3; color: #120d0b; transform: rotateY(180deg); padding: 10px; font-size: 0.8rem; }
+
+/* 🕯️ CANVAS & ANIMAÇÕES */
+canvas { position: fixed; top: 0; left: 0; z-index: 1; }
+
+button {
+    margin-top: 20px; padding: 10px 25px;
+    background: transparent; border: 1px solid rgba(245,230,211,0.3);
+    color: #f5e6d3; cursor: pointer; backdrop-filter: blur(5px);
+    transition: 0.4s; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem;
 }
 
-button:hover{
-  transform:scale(1.05);
+button:hover { background: #f5e6d3; color: #120d0b; }
+
+@keyframes grain {
+    0%, 100% { transform: translate(0,0); }
+    10% { transform: translate(-5%, -5%); }
 }
 
-/* FADE CINEMATOGRÁFICO */
-.fade{
-  animation:fadeIn 3s forwards;
+@keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
+.footer-note { position: absolute; bottom: 10%; opacity: 0.5; font-size: 0.7rem; letter-spacing: 2px; }
